@@ -31,14 +31,14 @@ the space touches if there is no bomb in it."""
     for i in range(bombs):
         while bomb_indexes[i] in bomb_indexes[:i]:
             bomb_indexes[i] = random.randint(0, width*height-1)
-    
+
     # Putting bombs on field
     x = 1
     for index in bomb_indexes:
         row, column = Get_Row_Column(index, width)
         board[row][column] = -1
-    
-    # Calculating number of bombs each square touches  
+
+    # Calculating number of bombs each square touches
     for index in bomb_indexes:
         row, column = Get_Row_Column(index, width)
         for direction in directions:
@@ -47,7 +47,7 @@ the space touches if there is no bomb in it."""
 
                 # Only increment space in direction if there is not a bomb there
                 if (board[row + direction[0]][column + direction[1]] != -1):
-                    board[row + direction[0]][column + direction[1]] += 1                
+                    board[row + direction[0]][column + direction[1]] += 1
 
     return board
 
@@ -62,9 +62,6 @@ def Print_Board(board):
     for row in board:
         print(' '.join(['X' if x==-1 else str(x) for x in row]))
 
-if __name__=='__main__':
-    width = 16
-    height = 16
-    bombs = 40
-    a = Random_Board(width, height, bombs)
-    Print_Board(a)
+def create_unknown_board(board):
+    """This function returns the board as an unknown board"""
+    return [['-' for i in board] for i in board]
