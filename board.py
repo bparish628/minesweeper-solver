@@ -1,5 +1,5 @@
-# -*- coding: utf-8 -*-
 import random
+from itertools import product
 
 def Random_Board(width, height, bombs):
     """This function creates a random Minesweeper
@@ -71,3 +71,9 @@ def Print_Board(board):
 def create_unknown_board(board):
     """This function returns the board as an unknown board"""
     return [['*' for i in board] for i in board]
+
+def get_neighbors(cell, board):
+    size = len(board)
+    for c in product(*(range(n-1, n+2) for n in cell)):
+        if c != cell and all(0 <= n < size for n in c):
+            yield c

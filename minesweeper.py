@@ -14,7 +14,7 @@ def get_difficulty():
 
   # Keep prompting the user until they select a correct option
   while True:
-    user_diff = raw_input('Please select a difficulty:')
+    user_diff = raw_input('Please select a difficulty: ')
     if (user_diff == '1'):
       return 'BEGINNER'
     elif (user_diff == '2'):
@@ -24,7 +24,7 @@ def get_difficulty():
 
 def get_selection():
   while True:
-    user_selection = raw_input('Tile selection (ex: 1,3):')
+    user_selection = raw_input('Tile selection (ex: 1,3): ')
     if (',' in user_selection):
       x,y = user_selection.split(',')
       if (x and y):
@@ -40,6 +40,7 @@ if __name__=='__main__':
   # Show initial board
   game.print_board()
 
-  # Just an example of getting a selection and showing the new board
-  game.select(*get_selection())
-  game.print_board()
+  while True:
+    # Just an example of getting a selection and showing the new board
+    game.select(*get_selection())
+    game.print_board()
