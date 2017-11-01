@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import random
 
 def Random_Board(width, height, bombs):
@@ -58,10 +59,13 @@ width if read from top left to right."""
     return index//width, index%width
 
 def Print_Board(board):
-    """This function prints the board nicely aligned"""
-    for row in board:
-        print(' '.join(['X' if x==-1 else str(x) for x in row]))
+    """This function prints the board nicely aligned with the x,y axis titles"""
+    print (' '.join([' ', ' '] + [str(x) for x in range(len(board))])) # Print each index number for the row
+    print (' '.join([' ', ' '] + ['-' for x in range(len(board))])) # Print a - for each number
+
+    for (y, row) in enumerate(board):
+        print(' '.join([str(y), '|'] + ['X' if x==-1 else str(x) for x in row]))
 
 def create_unknown_board(board):
     """This function returns the board as an unknown board"""
-    return [['-' for i in board] for i in board]
+    return [['■' for i in board] for i in board]

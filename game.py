@@ -26,3 +26,10 @@ class Game:
     """"Prints the current state of the board. This is a pass through to board.Print_Board()"""
     board.Print_Board(self.board)
 
+  def select(self, x, y):
+    """Selects the cord (x,y) of the board and executes a 'click' action"""
+    self.board[y][x] = self.solved_board[y][x]
+
+  def get(self, x, y):
+    """Gets the value of the cord (x,y) of the board"""
+    return self.board[y][x] # x and y coords need to be switched to be correct
