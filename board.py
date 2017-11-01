@@ -60,15 +60,14 @@ width if read from top left to right."""
 
 def Print_Board(board):
     """This function prints the board nicely aligned with the x,y axis titles"""
-
     length = len(board)
-    pad = 1 if length < 10 else 2
-    print (' '.join([' ', ' '.ljust(pad)] + [str(x).ljust(pad) for x in range(length)])) # Print each index number for the row
-    print (' '.join([' ', ' '.ljust(pad)] + ['-'.ljust(pad) for x in range(length)])) # Print a - for each number
+    pad = 3
+    print (''.join([''.rjust(pad), ''.rjust(pad)] + [str(x).ljust(pad) for x in range(length)])) # Print each index number for the row
+    print (''.join([''.rjust(pad), ''.rjust(pad)] + ['-'.ljust(pad) for x in range(length)])) # Print a - for each number
 
     for (y, row) in enumerate(board):
-        print(' '.join([str(y).ljust(pad), '|'] + ['X'.ljust(pad) if x==-1 else str(x).ljust(pad*2) for x in row]))
+        print(''.join([str(y).rjust(pad), '|'] + ['!'.rjust(pad) if x==-1 else str(x).rjust(pad) for x in row]))
 
 def create_unknown_board(board):
     """This function returns the board as an unknown board"""
-    return [['■' for i in board] for i in board]
+    return [['*' for i in board] for i in board]

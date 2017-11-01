@@ -1,5 +1,10 @@
 from game import Game
 
+def show_instructions():
+  print('\n\t * untouched tile')
+  print('\t ! bomb')
+  print('\t 0-5 Number of bombs nearby')
+
 def get_difficulty():
   """Prompts the user for the difficulty"""
   print('\nDifficulties:')
@@ -28,6 +33,7 @@ def get_selection():
 
 
 if __name__=='__main__':
+  show_instructions()
   # Create the game with difficulty
   game = Game(get_difficulty())
 
