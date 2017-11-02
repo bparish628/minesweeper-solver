@@ -24,7 +24,7 @@ def get_difficulty():
 
 def get_selection():
   while True:
-    user_selection = raw_input('Tile selection (ex: 1,3): ')
+    user_selection = raw_input('\nTile selection (ex: 1,3): ')
     if (',' in user_selection):
       x,y = user_selection.split(',')
       if (x and y):

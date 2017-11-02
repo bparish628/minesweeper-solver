@@ -62,6 +62,7 @@ def Print_Board(board):
     """This function prints the board nicely aligned with the x,y axis titles"""
     length = len(board)
     pad = 3
+    print  # print an empty line
     print (''.join([''.rjust(pad), ''.rjust(pad)] + [str(x).ljust(pad) for x in range(length)])) # Print each index number for the row
     print (''.join([''.rjust(pad), ''.rjust(pad)] + ['-'.ljust(pad) for x in range(length)])) # Print a - for each number
 

@@ -45,7 +45,6 @@ class Game:
         if (self.board[current_y][current_x] == 0):
           current_neighbors = list(board.get_neighbors((current_x, current_y), self.board))
           near_untounched_tiles = sum([ 1 if self.board[ny][nx] == '*' else 0 for nx,ny in current_neighbors])
-          print(current_x, current_y, near_untounched_tiles)
           if (near_untounched_tiles > 0):
             for nx,ny in current_neighbors:
               if self.board[ny][nx] == '*':
