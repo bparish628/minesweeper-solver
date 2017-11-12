@@ -16,6 +16,7 @@ DIFFICULTIES = {
 
 class Game:
   def __init__(self, difficulty):
+    self.difficulty = difficulty
     self.width = DIFFICULTIES[difficulty]['width']
     self.height = DIFFICULTIES[difficulty]['height']
     self.bombs = DIFFICULTIES[difficulty]['bombs']

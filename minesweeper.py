@@ -1,4 +1,5 @@
 from game import Game
+from stats import Stats
 
 def show_instructions():
   print('\n\t * untouched tile')
@@ -38,6 +39,10 @@ if __name__=='__main__':
   # Create the game with difficulty
   game = Game(get_difficulty())
 
+  # Create a new stats object
+  stats = Stats()
+  stats.get()
+
   # Show initial board
   game.print_board()
 
@@ -46,5 +51,6 @@ if __name__=='__main__':
     game.select(*get_selection(game))
     game.print_board()
 
+  stats.update(game)
   # show the result of the game
   print('\nYou {}!'.format(game.get_status()))
