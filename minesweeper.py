@@ -22,12 +22,13 @@ def get_difficulty():
     elif (user_diff == 'X'):
       exit(1)
 
-def get_selection():
+def get_selection(game):
   while True:
     user_selection = raw_input('\nTile selection (ex: 1,3): ')
     if (',' in user_selection):
       x,y = user_selection.split(',')
-      if (x and y):
+      # Only allow if in the bounds of the board
+      if ((x and y) and (-1 < int(x) < game.width) and (-1 < int(y) < game.height)):
         return (int(x), int(y))
     print('Invalid Coordinates')
 
@@ -40,7 +41,10 @@ if __name__=='__main__':
   # Show initial board
   game.print_board()
 
-  while True:
+  while (game.get_status() == 'in_progress'):
     # Just an example of getting a selection and showing the new board
-    game.select(*get_selection())
+    game.select(*get_selection(game))
     game.print_board()
+
+  # show the result of the game
+  print('\nYou {}!'.format(game.get_status()))

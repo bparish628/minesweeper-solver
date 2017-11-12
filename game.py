@@ -16,10 +16,10 @@ DIFFICULTIES = {
 
 class Game:
   def __init__(self, difficulty):
-    width = DIFFICULTIES[difficulty]['width']
-    height = DIFFICULTIES[difficulty]['height']
-    bombs = DIFFICULTIES[difficulty]['bombs']
-    self.solved_board = board.Random_Board(width, height, bombs)
+    self.width = DIFFICULTIES[difficulty]['width']
+    self.height = DIFFICULTIES[difficulty]['height']
+    self.bombs = DIFFICULTIES[difficulty]['bombs']
+    self.solved_board = board.Random_Board(self.width, self.height, self.bombs)
     self.board = board.create_unknown_board(self.solved_board)
 
   def print_board(self):
@@ -53,3 +53,25 @@ class Game:
   def get(self, x, y):
     """Gets the value of the cord (x,y) of the board"""
     return self.board[y][x] # x and y coords need to be switched to be correct
+
+  def get_status(self):
+    """
+      Returns whether the game was won, lost, or in_progress
+    """
+    unsolved_squares = 0
+    shown_bombs = 0
+    for y in range(self.height):
+      for x in range(self.width):
+        symbol = self.get(x,y)
+        # if a bomb is shown then they lose
+        if (symbol == -1):
+          return 'lose'
+        if (symbol == '*'):
+          unsolved_squares += 1
+
+    # if amount of unsolved squares is the number of bombs they win
+    if (unsolved_squares == self.bombs):
+      return 'win'
+
+    # else the game is in_progress
+    return 'in_progress'
