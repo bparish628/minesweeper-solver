@@ -28,8 +28,8 @@ def get_selection(game):
     user_selection = raw_input('\nTile selection (ex: 1,3): ')
     if (',' in user_selection):
       x,y = user_selection.split(',')
-      # Only allow if in the bounds of the board
-      if ((x and y) and (-1 < int(x) < game.width) and (-1 < int(y) < game.height)):
+      # Only allow if it's an available move
+      if (x and y and (int(x),int(y)) in game.available_moves()):
         return (int(x), int(y))
     print('Invalid Coordinates')
 
