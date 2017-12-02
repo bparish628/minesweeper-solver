@@ -29,7 +29,7 @@ class Game:
 
   def available_moves(self):
     """Gets all available tiles that can be clicked"""
-    return [(x,y) for y,row in enumerate(self.board) for x,col in enumerate(self.board[y]) if self.board[x][y] == '*']
+    return [(y,x) for y,row in enumerate(self.board) for x,col in enumerate(self.board[y]) if self.board[x][y] == '*']
 
   def select(self, x, y):
     """Selects the cord (x,y) of the board and executes a 'click' action"""

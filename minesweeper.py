@@ -25,9 +25,14 @@ def get_difficulty():
 
 def get_selection(game):
   while True:
-    user_selection = raw_input('\nTile selection (ex: 1,3): ')
-    if (',' in user_selection):
-      x,y = user_selection.split(',')
+    user_selection = raw_input('\nTile selection (ex: 1 3): ')
+    if user_selection == '@hint' :
+      for y,row in enumerate(game.solved_board):
+        for x,col in enumerate(game.solved_board[y]):
+          if game.solved_board[y][x] != -1 and (x,y) in game.available_moves():
+            return (x, y)
+    if (' ' in user_selection):
+      x,y = user_selection.split(' ')
       # Only allow if it's an available move
       if (x and y and (int(x),int(y)) in game.available_moves()):
         return (int(x), int(y))
