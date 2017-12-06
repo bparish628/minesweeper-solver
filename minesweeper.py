@@ -1,5 +1,7 @@
 from game import Game
 from stats import Stats
+from solver import Minesweeper_Solver
+import sys
 
 def show_instructions():
   print('\n\t * untouched tile')
@@ -40,22 +42,34 @@ def get_selection(game):
 
 
 if __name__=='__main__':
-  show_instructions()
-  # Create the game with difficulty
-  game = Game(get_difficulty())
-
   # Create a new stats object
   stats = Stats()
   stats.get()
 
-  # Show initial board
-  game.print_board()
+  if ('--solver' in sys.argv):
+    games_played = 0
+    games_won = 0
+    for i in range(5000):
+      games_played += 1
+      game = Game('BEGINNER')
+      solver = Minesweeper_Solver(game)
+      is_a_win = solver.solve()
+      games_won += 1 if is_a_win else 0
+    stats.update('BEGINNER', games_won, games_played)
+  else:
+    show_instructions()
 
-  while (game.get_status() == 'in_progress'):
-    # Just an example of getting a selection and showing the new board
-    game.select(*get_selection(game))
+    # Create the game with difficulty
+    game = Game(get_difficulty())
+
+    # Show initial board
     game.print_board()
 
-  stats.update(game)
-  # show the result of the game
-  print('\nYou {}!'.format(game.get_status()))
+    while (game.get_status() == 'in_progress'):
+      # Just an example of getting a selection and showing the new board
+      game.select(*get_selection(game))
+      game.print_board()
+
+    stats.update(game.difficulty, 1 if game.get_status() == 'win' else 0, 1)
+    # show the result of the game
+    print('\nYou {}!'.format(game.get_status()))
