@@ -3,6 +3,8 @@ from stats import Stats
 from solver import Minesweeper_Solver
 import sys
 
+TIMES_TO_RUN_SOLVER = 1000
+
 def show_instructions():
   print('\n\t * untouched tile')
   print('\t ! bomb')
@@ -40,22 +42,30 @@ def get_selection(game):
         return (int(x), int(y))
     print('Invalid Coordinates')
 
+def get_solver():
+  if ('--beginner-solver' in sys.argv):
+    return 'BEGINNER'
+  if ('--intermediate-solver' in sys.argv):
+    return 'INTERMEDIATE'
+  return None
 
 if __name__=='__main__':
   # Create a new stats object
   stats = Stats()
   stats.get()
 
-  if ('--solver' in sys.argv):
+  solver_diff = get_solver()
+  if (solver_diff):
     games_played = 0
     games_won = 0
-    for i in range(5000):
+    game = Game(solver_diff)
+    solver = Minesweeper_Solver(game)
+    for i in range(TIMES_TO_RUN_SOLVER):
+      game.new()
       games_played += 1
-      game = Game('BEGINNER')
-      solver = Minesweeper_Solver(game)
       is_a_win = solver.solve()
       games_won += 1 if is_a_win else 0
-    stats.update('BEGINNER', games_won, games_played)
+    stats.update(solver_diff, games_won, games_played)
   else:
     show_instructions()
 

@@ -23,6 +23,10 @@ class Game:
     self.solved_board = board.Random_Board(self.width, self.height, self.bombs)
     self.board = board.create_unknown_board(self.solved_board)
 
+  def new(self):
+    self.solved_board = board.Random_Board(self.width, self.height, self.bombs)
+    self.board = board.create_unknown_board(self.solved_board)
+
   def print_board(self):
     """"Prints the current state of the board. This is a pass through to board.Print_Board()"""
     board.Print_Board(self.board)
