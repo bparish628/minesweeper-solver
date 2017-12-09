@@ -29,4 +29,5 @@ class Stats:
           stat['wins'], \
           stat['games_played']) + '\n' \
           for (difficulty, stat) in self.stats.items()])
-      # print current_difficulty + ': ' + self.stats[current_difficulty]['wins'] + ' wins out of ' + self.stats[current_difficulty]['games_played'] + ' games.'
+      win_percentage = float(self.stats[current_difficulty]['wins']) / float(self.stats[current_difficulty]['games_played']) * 100
+      print '{}: {} wins out of {} games. Winrate: {}%'.format(current_difficulty, self.stats[current_difficulty]['wins'], self.stats[current_difficulty]['games_played'], win_percentage)

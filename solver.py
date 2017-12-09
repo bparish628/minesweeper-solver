@@ -33,17 +33,20 @@ class Minesweeper_Solver:
     self.run_pattern_algorithms()
     # If there were no changes and there are actions left, then select a random choice
     if (not self.board_changed and self.actions):
+      self.predict()
       x, y = random.choice(self.actions)
       self.game.select(x,y)
 
   def run_pattern_algorithms(self):
+    """Runs all the different pattern algorithms to solve minesweeper"""
     self.board_changed = False
-    for state in self.get_states_near_unmarked():
+    for state in self.get_tiles_near_unfound():
       self.number_equals_unmarked(state)
       self.number_equals_mines(state)
     self.found_mines = list(set(self.found_mines)) # removes duplicates
 
-  def get_states_near_unmarked(self):
+  def get_tiles_near_unfound(self):
+    """Gets the tiles by the unopened tiles that have been opened. All these tiles will have already been selected"""
     states_nearby = [] # holds an array of states next to unmarked tiles
     actions = self.actions
     for action in actions:
@@ -62,19 +65,48 @@ class Minesweeper_Solver:
 
   def number_equals_unmarked(self, coord):
     """Checks if the coords number is equal to the unmarked tiles, then adds values to found_mines"""
-    x,y = coord
     unmarked_tiles = self.count_free_squares(coord)
-    if (unmarked_tiles == self.game.get(x,y)):
-      for n in list(board.get_neighbors((x, y), self.game.board)):
+    if (unmarked_tiles == self.game.get(*coord)):
+      for n in list(board.get_neighbors(coord, self.game.board)):
         if (self.game.get(*n) == '*'):
           self.found_mines.append(n)
 
   def number_equals_mines(self, coord):
     """Checks if the coords number is equal to the mines tiles around it, then selects the non mine tiles"""
-    x,y = coord
     mine_tiles = self.count_mine_squares(coord)
-    if (mine_tiles == self.game.get(x,y)):
-      for n in list(board.get_neighbors((x, y), self.game.board)):
+    if (mine_tiles == self.game.get(*coord)):
+      for n in list(board.get_neighbors(coord, self.game.board)):
         if (self.game.get(*n) == '*' and n not in self.found_mines):
           self.game.select(*n)
           self.board_changed = True
+
+  def can_be_mine(self, coord, ghost_mines):
+    neighbors = list(board.get_neighbors(coord, self.game.board))
+    num_of_mines = sum([1 if self.game.get(nx,ny) == '*' and ((nx, ny) in self.found_mines or (nx, ny) in ghost_mines) else 0 for (nx, ny) in neighbors])
+    if num_of_mines < self.game.get(*coord):
+      return True
+    return False
+
+  def get_border_tiles(self):
+    """Gets the tiles that are the border of the solved portion"""
+    border_tiles = [] # holds an array of states of the border tiles
+    actions = self.actions
+    for tile in actions:
+      for (nx, ny) in list(board.get_neighbors(tile, self.game.board)):
+        if (self.game.get(nx, ny) != '*'):
+          border_tiles.append(tile)
+    return list(set(border_tiles)) # remove dups
+
+  def predict(self):
+    predicitions = []
+    opened_border_tiles = self.get_tiles_near_unfound()
+    unknown_border_tiles = self.get_border_tiles()
+
+    for tile in opened_border_tiles:
+      ghost_mines = []
+      for utile in unknown_border_tiles:
+        for n in list(board.get_neighbors(tile, self.game.board)):
+          if self.can_be_mine(n, ghost_mines):
+            ghost_mines.append(n)
+      predicitions.append(ghost_mines)
+    print predicitions

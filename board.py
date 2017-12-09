@@ -78,3 +78,12 @@ def get_neighbors(cell, board):
     for c in product(*(range(n-1, n+2) for n in cell)):
         if c != cell and all(0 <= n < size for n in c):
             yield c
+
+class Tile:
+    def __init__(self, game, coord):
+        self.game = game
+        self.revealed = False
+        self.coord = coord
+        x,y = coord
+        self.value = game.solved_board[y][x]
+        self.neighbors = get_neighbors(coord, game.board)

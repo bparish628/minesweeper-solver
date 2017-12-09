@@ -3,12 +3,12 @@ from stats import Stats
 from solver import Minesweeper_Solver
 import sys
 
-TIMES_TO_RUN_SOLVER = 1000
+TIMES_TO_RUN_SOLVER = 1
 
 def show_instructions():
   print('\n\t * untouched tile')
   print('\t ! bomb')
-  print('\t 0-5 Number of bombs nearby')
+  print('\t 0-8 Number of bombs nearby')
 
 def get_difficulty():
   """Prompts the user for the difficulty"""

@@ -63,6 +63,12 @@ class Game:
     """Gets the value of the cord (x,y) of the board"""
     return self.board[y][x] # x and y coords need to be switched to be correct
 
+  def is_edge(self, coord):
+    x,y = coord
+    if ((y == 0 or y == self.height - 1) or (x == 0 or x == self.width - 1)):
+      return True
+    return False
+
   def get_status(self):
     """
       Returns whether the game was won, lost, or in_progress
