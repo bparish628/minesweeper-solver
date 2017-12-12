@@ -109,4 +109,3 @@ class Minesweeper_Solver:
           if self.can_be_mine(n, ghost_mines):
             ghost_mines.append(n)
       predicitions.append(ghost_mines)
-    print predicitions
