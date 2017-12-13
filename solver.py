@@ -33,7 +33,7 @@ class Minesweeper_Solver:
     self.run_pattern_algorithms()
     # If there were no changes and there are actions left, then select a random choice
     if (not self.board_changed and self.actions):
-      self.predict()
+      # self.predict()
       x, y = random.choice(self.actions)
       self.game.select(x,y)
 

@@ -3,7 +3,7 @@ from stats import Stats
 from solver import Minesweeper_Solver
 import sys
 
-TIMES_TO_RUN_SOLVER = 1
+TIMES_TO_RUN_SOLVER = 250
 
 def show_instructions():
   print('\n\t * untouched tile')
