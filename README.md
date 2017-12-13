@@ -1,6 +1,8 @@
 # minesweeper-solver
 A minesweeper game with a built in solver.
-This game requires python 2.7 to be install on your system. This was also only tested on a unix machine
+This game requires python 2.7 to be install on your system. This was also only tested on a unix machine.
+
+There are no test cases provided considering this is using a random generated board.
 
 ## Running the program
 To play a minesweeper game: (you can use @hint as your move if you need help solving it)
