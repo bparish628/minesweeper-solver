@@ -2,7 +2,7 @@
 A minesweeper game with a built in solver.
 This game requires python 2.7 to be install on your system. This was also only tested on a unix machine.
 
-There are no test cases provided considering this is using a random generated board.
+The test cases are under the test cases heading.
 
 ## Running the program
 To play a minesweeper game: (you can use @hint as your move if you need help solving it)
@@ -23,8 +23,10 @@ echo -e "INTERMEDIATE,0,0\nBEGINNER,0,0" > stats.sav
 ```
 
 
-## Running Tests
+## Test Cases
 The point of this project is to test the winability of a game of minesweeper with a solver. This includes both beginner and intermediate boards.
+
+If you just want to play the game normally use `python minesweeper.py`.
 
 For testing purposes, it will just be using a random board each time, so there is no specific input besides running the solvers (i.e. `python minesweeper.py --beginner-solver` ). After it's run it will create/append to the `stats.sav` file the wins and games played (which is persisted between games). If you want to reset it you can run `echo -e "INTERMEDIATE,0,0\nBEGINNER,0,0" > stats.sav`.
 
